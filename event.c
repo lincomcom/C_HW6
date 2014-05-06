@@ -140,7 +140,7 @@ void PrintPrompt() {
 void MoveEvent(int m, int n) {
 	/* @@@ check if m and n are both within range. If not, print warning. */
 	if(CheckEventNum(m)==0||
-           CheckEventNum(n)==0){
+       CheckEventNum(n)==0){
         printf("event is out of range\n");
     }
 
@@ -149,10 +149,10 @@ void MoveEvent(int m, int n) {
         printf("event %d is empty\n", m);
 
     /* @@@ make sure the destination (n) event is empty; otherwise, report error
-	 * @@@ if you are moving from an event to itself, just skip it.
-	 * @@@ otherwise, string-copy source to destination.
-	 * @@@ finally, set the source string buffer to empty string.
-	 * */
+     * @@@ if you are moving from an event to itself, just skip it.
+     * @@@ otherwise, string-copy source to destination.
+     * @@@ finally, set the source string buffer to empty string.
+     * */
 	else if(!strcmp(eventStr[n], noPtr)){
         if (m==n) return;
         else{
