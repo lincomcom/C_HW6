@@ -12,7 +12,7 @@ static int currentEventNumber = 0;
 static char eventStr[MAXEVENTS][BUFLEN];
 const char *noPtr="(no event)\n";
 
-/* @@@ Replace with your own code from hw5. */
+/* set current event number to eventNumber */
 void GotoEvent(int eventNumber) {
 	/* check if eventNumber is within legal bound. warn if not. */
 	if(eventNumber<0||eventNumber>=MAXEVENTS){
@@ -23,6 +23,7 @@ void GotoEvent(int eventNumber) {
 	else
         currentEventNumber=eventNumber;
 }
+
 int CheckEventNum(int eventNumber){
     if(eventNumber>=-1&&
        eventNumber<MAXEVENTS)
@@ -30,6 +31,7 @@ int CheckEventNum(int eventNumber){
     else
         return 0;
 }
+
 void ListAll(){
     int i;
     for(i=0; i<MAXEVENTS; i++){
@@ -38,7 +40,9 @@ void ListAll(){
         }
 }
 
-/* @@@ Replace your own code from hw5. */
+/* print eventNumber's event string, or all events' event strings if
+ * -1
+ */
 void ListEvent(int eventNumber) {
     /*check eventNumber range between -1(no input) and MAXEVENTS*/
     if(CheckEventNum(eventNumber)==0)
@@ -46,7 +50,7 @@ void ListEvent(int eventNumber) {
 
     /* check if eventNumber is -1. If so, do a for loop over all events,
 	 * check if eventStr[i] is empty string; if not, print it. */
-	if(eventNumber==-1)
+	else if(eventNumber==-1)
         ListAll();
 
     /* if eventNumber is not -1, then print the event string (of eventNumber) if
@@ -56,7 +60,9 @@ void ListEvent(int eventNumber) {
 
 }
 
-/* @@@ Replace with your own code from hw5 */
+/* set the current event number's event string to evt if the current
+ * event is not empty, or else report an error
+ */
 void AddEvent(char *evt) {
 	/* if evt is an empty string, tell the user that Event description empty and
 	 * is not added. */
@@ -74,7 +80,10 @@ void AddEvent(char *evt) {
         strcpy(eventStr[currentEventNumber], evt);
 }
 
-/* @@@ paste in your own code from hw5 */
+/* if eventNumber is not -1, then delete the eventNumber's event
+ * string (set to empty string); otherwise, delete the current event
+ * number's event
+ */
 void DeleteEvent(int eventNumber) {
 	/* declare a local event number (say, call it e)
 	 * and set it to either the current event number if the given event numbe is
@@ -94,7 +103,7 @@ void DeleteEvent(int eventNumber) {
         sprintf(eventStr[e] ,noPtr);
 }
 
-/* @@@ print help string */
+/* print the help string */
 void PrintHelp() {
 	/* @@@ print not just last week's help string but also this week's commands */
 	printf("goto n    : go to event #n\n");
@@ -110,7 +119,7 @@ void PrintHelp() {
     printf("find      : list events whose descriptions contain the string\n");
 }
 
-/* @@@ paste in your code from hw5 */
+/* called once to initialize the array */
 void InitTable() {
 	/* use a loop to walk through all eventStr[i] entries and set each to empty
 	 * string.*/
@@ -120,7 +129,7 @@ void InitTable() {
     }
 }
 
-/* @@@ paste in your code from hw5 */
+/* prints the current event number and > */
 void PrintPrompt() {
 	/* this is a single printf statement that prints the current event number as a
 	 * prompt */
@@ -131,7 +140,7 @@ void PrintPrompt() {
 void MoveEvent(int m, int n) {
 	/* @@@ check if m and n are both within range. If not, print warning. */
 	if(CheckEventNum(m)==0||
-       CheckEventNum(n)==0){
+           CheckEventNum(n)==0){
         printf("event is out of range\n");
     }
 
