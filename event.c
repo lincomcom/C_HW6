@@ -17,7 +17,7 @@ void GotoEvent(int eventNumber) {
 	/* check if eventNumber is within legal bound. warn if not. */
 	if(eventNumber<0||eventNumber>=MAXEVENTS){
         printf("Event number %d is invalid.\n"
-           "Please input eventNumber between 0~%d\n", eventNumber, MAXEVENTS-1);
+               "Please input eventNumber between 0~%d\n", eventNumber, MAXEVENTS-1);
     }
 	/* otherwise, set currentEventNumber to eventNumber. */
 	else
@@ -37,6 +37,7 @@ void ListAll(){
             printf(" %d: %s", i, eventStr[i]);
         }
 }
+
 /* @@@ Replace your own code from hw5. */
 void ListEvent(int eventNumber) {
     /*check eventNumber range between -1(no input) and MAXEVENTS*/
@@ -59,17 +60,17 @@ void ListEvent(int eventNumber) {
 void AddEvent(char *evt) {
 	/* if evt is an empty string, tell the user that Event description empty and
 	 * is not added. */
-	 if(!strcmp(evt, noPtr))
+    if(!strcmp(evt, noPtr))
         printf("Event description empty and is not added\n");
 
 	/* otherwise, if the current event is not empty string, then tell the user
 	 * that the event number exists, and event is not added. */
-	 else if(strcmp(eventStr[currentEventNumber], noPtr))
+    else if(strcmp(eventStr[currentEventNumber], noPtr))
         printf("The event number(%d) exists, and event is not added.\n", currentEventNumber);
 	/* in all other cases, string-copy from evt to the
 	 * eventStr[currentEventNumber]
 	 */
-	 else
+    else
         strcpy(eventStr[currentEventNumber], evt);
 }
 
@@ -78,18 +79,19 @@ void DeleteEvent(int eventNumber) {
 	/* declare a local event number (say, call it e)
 	 * and set it to either the current event number if the given event numbe is
 	 * -1, or set it to the given event number otherwise (must be within range). */
-	 int e;
-	 if(eventNumber==-1)
+    int e;
+    if(eventNumber==-1)
         e=currentEventNumber;
-     else if(CheckEventNum(eventNumber))
+    else if(CheckEventNum(eventNumber))
         e=eventNumber;
-     else
+    else
         printf("event #%d is out of range\n", eventNumber);
+
 	/* to delete, set the eventStr[e] entry to empty string */
 	if(strcmp(eventStr[currentEventNumber], noPtr)==0)
-            printf("event #%d empty\n", currentEventNumber);
-        else
-            sprintf(eventStr[e] ,noPtr);
+        printf("event #%d empty\n", currentEventNumber);
+    else
+        sprintf(eventStr[e] ,noPtr);
 }
 
 /* @@@ print help string */
@@ -132,9 +134,11 @@ void MoveEvent(int m, int n) {
        CheckEventNum(n)==0){
         printf("event is out of range\n");
     }
+
     /* @@@ make sure the source (m) event is not empty; otherwise, report error */
     else if(!strcmp(eventStr[m], noPtr))
         printf("event %d is empty\n", m);
+
     /* @@@ make sure the destination (n) event is empty; otherwise, report error
 	 * @@@ if you are moving from an event to itself, just skip it.
 	 * @@@ otherwise, string-copy source to destination.
@@ -170,12 +174,12 @@ void SwapEvents(int m, int n) {
 	/* @@@ if not swapping with itself, then copy one string to temp string
 	 * buffer, overwite first event string with second string, then overwrite
 	 * second string buffer with saved first one. */
-	 else if (m==n) return;
-        else{
-			strcpy( temp, eventStr[m]);
-			strcpy( eventStr[m], eventStr[n]);
-			strcpy( eventStr[n], temp);
-		}
+    else if (m==n) return;
+    else{
+        strcpy( temp, eventStr[m]);
+        strcpy( eventStr[m], eventStr[n]);
+        strcpy( eventStr[n], temp);
+    }
 }
 
 /* @@@ find events whose descriptions contain the string and list them. */
